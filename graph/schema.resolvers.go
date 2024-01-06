@@ -12,6 +12,10 @@ import (
 	"github.com/mitdonga/gqlgen-todos/graph/model"
 )
 
+type Resolver struct {
+	todos []*model.Todo
+}
+
 // CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	randNumber, _ := rand.Int(rand.Reader, big.NewInt(100))
@@ -26,7 +30,7 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
+	return r.todos, nil
 }
 
 // Mutation returns MutationResolver implementation.
