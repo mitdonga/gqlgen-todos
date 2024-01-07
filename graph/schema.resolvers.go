@@ -6,15 +6,12 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"crypto/rand"
+	"fmt"
 	"math/big"
+
 	"github.com/mitdonga/gqlgen-todos/graph/model"
 )
-
-type Resolver struct {
-	todos []*model.Todo
-}
 
 // CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
@@ -22,10 +19,14 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	todo := &model.Todo{
 		Text: input.Text,
 		ID:   fmt.Sprintf("T%d", randNumber),
-		User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
 	}
 	r.todos = append(r.todos, todo)
 	return todo, nil
+}
+
+// UpdateTodo is the resolver for the updateTodo field.
+func (r *mutationResolver) UpdateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
+	panic(fmt.Errorf("not implemented: UpdateTodo - updateTodo"))
 }
 
 // Todos is the resolver for the todos field.
